@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 import QuizList from "../pages/quiz/QuizList";
 import QuizCreate from "../pages/quiz/QuizCreate";
@@ -20,6 +20,7 @@ const AppRoutes: React.FC = () => {
         path="/quiz/:id/problems/:problemId/edit"
         element={<ProblemEdit />}
       />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
