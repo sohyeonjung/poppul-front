@@ -1,11 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
-import { User, AuthState } from "../hooks/useAuth";
-import { authService } from "../services/api";
-import { userService } from '../services/userService';
+import { userService } from "../services/userService";
+import type { UserResponse as User } from "../types/user";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: any | null;
+  user: User | null;
   login: (token: string) => void;
   logout: () => void;
 }
@@ -16,13 +15,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
-      // TODO: Fetch user data if needed
+      userService.checkAuth()
+        .then(userData => setUser(userData))
+        .catch(() => {
+          setIsAuthenticated(false);
+          localStorage.removeItem('token');
+        });
     }
   }, []);
 
@@ -32,9 +36,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
-    setUser(null);
+    userService.logout()
+      .then(() => {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        setUser(null);
+      });
   };
 
   return (
