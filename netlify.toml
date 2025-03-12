@@ -4,16 +4,22 @@ to = "/index.html"
 status = 200
 
 [[headers]]
-  for = "/*.js"
+  for = "/assets/*.js"
   [headers.values]
     Content-Type = "text/javascript"
 
 [[headers]]
-  for = "/*.mjs"
+  for = "/assets/*.mjs"
   [headers.values]
     Content-Type = "text/javascript"
 
 [[headers]]
-  for = "/*.css"
+  for = "/assets/*.css"
   [headers.values]
     Content-Type = "text/css"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
