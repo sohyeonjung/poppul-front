@@ -1,29 +1,30 @@
 // src/service/userService.ts
-import api from './api';
-import type { UserRequest, UserResponse } from '../types/user';
+import axios from 'axios';
+import { UserRequest, UserResponse } from '../types/user';
 
-export class UserService {
-  async register(data: UserRequest): Promise<UserResponse> {
-    const response = await api.post<UserResponse>('/register', data);
-    return response.data;
-  }
+const apiUrl = 'http://localhost:8080/api';
 
-  async login(data: UserRequest): Promise<UserResponse> {
-    const response = await api.post<UserResponse>('/login', data);
-    return response.data;
-  }
+const api = axios.create({
+  baseURL: apiUrl,
+  withCredentials: true,
+});
 
-  async logout(): Promise<void> {
-    await api.post('/logout');
-  }
+export const registerUser = async (data: UserRequest): Promise<UserResponse> => {
+  const response = await api.post<UserResponse>('/register', data);
+  return response.data;
+};
 
-  async checkAuth(): Promise<UserResponse> {
-    const response = await api.get<UserResponse>('/check-auth');
-    return response.data;
-  }
-}
+export const loginUser = async (data: UserRequest): Promise<UserResponse> => {
+  const response = await api.post<UserResponse>('/login', data);
+  return response.data;
+};
 
-export const userService = new UserService();
+export const logoutUser = async (): Promise<UserResponse> => {
+  const response = await api.post<UserResponse>('/logout');
+  return response.data;
+};
 
-// Re-export types
-export type { UserRequest, UserResponse };
+export const checkAuthStatus = async (): Promise<UserResponse> => {
+  const response = await api.get<UserResponse>('/check-auth');
+  return response.data;
+};
