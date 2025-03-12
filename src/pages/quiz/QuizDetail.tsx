@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Quiz } from "../../types/quiz";
-import { Problem } from "../../types/problem";
-import { quizService } from "../../services/quizService";
+import type { Problem } from "../../types/problem";
 import { problemService } from "../../services/problemService";
+import { quizService } from "../../services/quizService";
 
 const QuizDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

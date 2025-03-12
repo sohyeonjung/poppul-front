@@ -4,6 +4,7 @@ export interface Quiz {
   id: number;
   title: string;
   userId: string;
+  description: string;
   problems?: Problem[];
 }
 
@@ -14,4 +15,5 @@ export interface CreateQuizDto {
 
 export interface UpdateQuizDto {
   title?: string;
+  description?: string;
 }
