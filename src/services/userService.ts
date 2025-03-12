@@ -2,7 +2,7 @@
 import api from './api';
 import type { UserRequest, UserResponse } from '../types/user';
 
-class UserService {
+export class UserService {
   async register(data: UserRequest): Promise<UserResponse> {
     const response = await api.post<UserResponse>('/register', data);
     return response.data;
@@ -24,4 +24,6 @@ class UserService {
 }
 
 export const userService = new UserService();
+
+// Re-export types
 export type { UserRequest, UserResponse };
