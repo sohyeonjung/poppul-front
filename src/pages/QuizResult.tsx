@@ -66,13 +66,13 @@
 //             <div
 //               key={index}
 //               className={`question-review ${
-//                 question.is_answer ? "correct" : "incorrect"
+//                 question.isCorrect ? "correct" : "incorrect"
 //               }`}
 //             >
 //               <div className="question-header">
 //                 <span className="question-number">문제 {index + 1}</span>
 //                 <span className="question-status">
-//                   {question.is_answer ? "정답" : "오답"}
+//                   {question.isCorrect ? "정답" : "오답"}
 //                 </span>
 //               </div>
 //               <p className="question-content">{question.content}</p>
@@ -81,7 +81,7 @@
 //                   <span className="label">내 답:</span>
 //                   <span className="value">{question.selectedAnswer}</span>
 //                 </div>
-//                 {!question.is_answer && (
+//                 {!question.isCorrect && (
 //                   <div className="correct-answer">
 //                     <span className="label">정답:</span>
 //                     <span className="value">{question.correctAnswer}</span>

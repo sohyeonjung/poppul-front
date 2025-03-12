@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Problem, CreateProblemDto, UpdateProblemDto } from "../types/problem";
+import { Problem, CreateProblemDto } from "../types/problem";
 
 const API_URL = "http://localhost:8080/api/quiz";
 
@@ -23,10 +23,10 @@ export const problemService = {
   },
 
   // 특정 문제 조회
-  getProblem: async (quizId: string, questionId: string): Promise<Problem> => {
+  getProblem: async (quizId: string, problemId: string): Promise<Problem> => {
     try {
       const response = await axiosInstance.get(
-        `${API_URL}/${quizId}/questions/${questionId}`
+        `${API_URL}/${quizId}/questions/${problemId}`
       );
       return response.data;
     } catch (error) {
@@ -55,12 +55,12 @@ export const problemService = {
   // 문제 수정
   updateProblem: async (
     quizId: number,
-    questionId: number,
-    problem: UpdateProblemDto
+    problemId: number,
+    problem: Partial<Problem>
   ): Promise<Problem> => {
     try {
       const response = await axiosInstance.put(
-        `${API_URL}/${quizId}/questions/${questionId}`,
+        `${API_URL}/${quizId}/questions/${problemId}`,
         problem
       );
       return response.data;
@@ -71,14 +71,9 @@ export const problemService = {
   },
 
   // 문제 삭제
-  deleteProblem: async (quizId: number, questionId: number): Promise<void> => {
+  deleteProblem: async (quizId: number, problemId: number): Promise<void> => {
     try {
-      console.log(
-        `Deleting problem: quizId=${quizId}, problemId=${questionId}`
-      ); // 디버깅용 로그 추가
-      await axiosInstance.delete(
-        `${API_URL}/${quizId}/questions/${questionId}`
-      );
+      await axiosInstance.delete(`${API_URL}/${quizId}/questions/${problemId}`);
     } catch (error) {
       console.error("Error deleting problem:", error);
       throw error;

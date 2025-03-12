@@ -1,7 +1,7 @@
 export interface Answer {
   id: number;
   content: string;
-  is_answer: boolean;
+  isCorrect: boolean;
 }
 
 export interface Problem {

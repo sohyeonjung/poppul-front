@@ -100,7 +100,7 @@ const ProblemList: React.FC = () => {
                         <div
                           key={answerIndex}
                           className={`p-2 rounded ${
-                            answer.is_answer
+                            answer.isCorrect
                               ? "bg-green-100 border border-green-300"
                               : "bg-gray-50 border border-gray-200"
                           }`}
