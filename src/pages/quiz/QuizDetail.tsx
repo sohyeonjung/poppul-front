@@ -257,7 +257,7 @@ const QuizDetail: React.FC = () => {
                               <div
                                 key={answer.id}
                                 className={`flex items-center p-4 rounded-xl transition-all duration-200 ${
-                                  answer.isCorrect
+                                  answer.is_answer
                                     ? "bg-green-50 border-2 border-green-200 shadow-sm"
                                     : "bg-white border-2 border-gray-100 group-hover:border-gray-200"
                                 }`}
@@ -265,19 +265,19 @@ const QuizDetail: React.FC = () => {
                                 <div className="flex items-center flex-1 gap-4">
                                   <div
                                     className={`relative flex items-center justify-center w-10 h-10 rounded-xl text-base font-bold transition-all duration-200 ${
-                                      answer.isCorrect
+                                      answer.is_answer
                                         ? "bg-gradient-to-br from-green-400 to-green-600 text-white shadow-lg shadow-green-200"
                                         : "bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 group-hover:from-blue-50 group-hover:to-blue-100"
                                     }`}
                                   >
                                     {answerIndex + 1}
-                                    {answer.isCorrect && (
+                                    {answer.is_answer && (
                                       <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
                                     )}
                                   </div>
                                   <p
                                     className={`text-lg ${
-                                      answer.isCorrect
+                                      answer.is_answer
                                         ? "text-green-700 font-semibold"
                                         : "text-gray-700 group-hover:text-gray-900"
                                     }`}
@@ -285,7 +285,7 @@ const QuizDetail: React.FC = () => {
                                     {answer.content}
                                   </p>
                                 </div>
-                                {answer.isCorrect && (
+                                {answer.is_answer && (
                                   <span className="ml-2 inline-flex items-center px-4 py-1.5 rounded-xl text-sm font-bold bg-gradient-to-r from-green-400 to-green-500 text-white shadow-sm">
                                     <svg
                                       className="w-4 h-4 mr-1.5"

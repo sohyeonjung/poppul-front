@@ -9,6 +9,7 @@ export interface Quiz {
 
 export interface CreateQuizDto {
   title: string;
+  description: string;
 }
 
 export interface UpdateQuizDto {
