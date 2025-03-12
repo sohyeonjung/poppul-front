@@ -1,10 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 import { userService } from "../services/userService";
-import type { UserResponse as User } from "../types/user";
+import type { UserResponse } from "../types/user";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: User | null;
+  user: UserResponse | null;
   login: (token: string) => void;
   logout: () => void;
 }
@@ -15,14 +15,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserResponse | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
       userService.checkAuth()
-        .then(userData => setUser(userData))
+        .then((userData: UserResponse) => setUser(userData))
         .catch(() => {
           setIsAuthenticated(false);
           localStorage.removeItem('token');
